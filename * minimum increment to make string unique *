@@ -1,0 +1,41 @@
+// solution 1 using sorting 
+
+class Solution {
+    public int minIncrementForUnique(int[] A) {
+        Arrays.sort(A);
+        int count = 0;
+        for(int i=1;i<A.length;i++){
+            if(A[i] <= A[i-1]){
+                int diff = (A[i-1]+1) - A[i];
+                A[i]=A[i-1]+1;
+                count+=diff;  
+            }
+        }
+        return count;
+    }
+}
+
+// solution 2 using mathmatics...
+
+class Solution {
+    public int minIncrementForUnique(int[] arr) {
+        if (arr == null || arr.length == 0)
+            return 0;
+        
+        int moves = 0;
+        int[] freq = new int[100009]; 
+        for (int num : arr)
+            freq[num]++;
+        
+        for (int i = 0; i < freq.length - 1; i++) {
+            if (freq[i] <= 1) 
+                continue;
+           
+            int remain = freq[i] - 1;
+            moves += remain;
+            freq[i + 1] += remain;
+        }
+        
+        return moves;
+    }
+}
