@@ -1,0 +1,27 @@
+
+
+class Solution {
+public class helper implements Comparator<String>{
+    public int compare(String s1,String s2){
+        
+            if (s1.length() == s2.length()) 
+                return s1.compareTo(s2);
+            else
+                return Integer.compare(s1.length(), s2.length());
+        
+    }
+}
+    public String kthLargestNumber(String[] nums, int k) {
+        if (nums == null || nums.length == 0)
+            return "";
+        int length = nums.length;
+        PriorityQueue<String> minHeap = new PriorityQueue<>( new helper());
+        for (String num : nums) {
+            minHeap.offer(num);
+            if (minHeap.size() > k) {
+                minHeap.poll();
+            }
+        }
+        return minHeap.poll();
+    }
+}
