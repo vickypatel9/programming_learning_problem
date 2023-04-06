@@ -1,0 +1,17 @@
+class Solution {
+    public String frequencySort(String s) {
+        Map<Character,Integer> map=new HashMap<>();
+        StringBuilder sb =new StringBuilder();
+        for(int i=0;i<s.length();i++ ){
+            map.put(s.charAt(i),map.getOrDefault(s.charAt(i),0)+1);
+        }
+       List<Map.Entry<Character,Integer>>entries=new ArrayList<>(map.entrySet());
+          Collections.sort(entries,(a,b) ->b.getValue()-a.getValue());
+        for(Map.Entry<Character,Integer> i:entries){
+            for(int j=0;j<i.getValue();j++){
+               sb.append(i.getKey());
+            }
+        }
+        return sb.toString();
+    }
+}
